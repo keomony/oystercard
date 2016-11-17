@@ -16,6 +16,10 @@ describe Journey do
       expect(journey2.entry_station).to eq nil
     end
 
+    it "should have penalty fare by default" do
+      expect(journey.fare).to eq Journey::PENALTY_FARE
+    end
+
   end
 
   describe '#end_journey' do

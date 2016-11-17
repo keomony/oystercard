@@ -23,8 +23,10 @@ class Oystercard
      end
 
      def touch_out(exit_station)
-       @balance -= MINIMUM_BALANCE
+       @journey = Journey.new() if @journey.nil?
        @journey.end(exit_station)
+       deduct(@journey.calculate_fare)
+       @journey = nil
      end
 
      private
