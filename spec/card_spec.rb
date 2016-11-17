@@ -3,10 +3,10 @@ require 'card.rb'
 describe Oystercard do
 
   subject(:card) { described_class.new }
-  let(:entry_station) { double :station }
-  let(:exit_station) { double :station }
+  let(:first_station) { double :station }
+  let(:second_station) { double :station }
   # let(:journey) { double :journey }
-  let(:journey){ Journey.new(entry_station) }
+  let(:journey){ Journey.new(first_station) }
 
   describe "#initialization" do
 
@@ -37,7 +37,7 @@ describe Oystercard do
   describe "#touch_in" do
 
     it "should raise error if balance is below 1 pound" do
-      expect{card.touch_in(entry_station)}.to raise_error("Cannot touch in: not enough funds")
+      expect{card.touch_in(first_station)}.to raise_error("Cannot touch in: not enough funds")
     end
 
   end
@@ -47,14 +47,14 @@ describe Oystercard do
 
     before do
       card.top_up(described_class::MAXIMUM_BALANCE)
-      card.touch_in(entry_station)
+      card.touch_in(first_station)
     end
 
     describe "#touch_in" do
 
       it "should create a new journey with entry_station" do
-        card.touch_in(entry_station)
-        expect(journey.entry_station).to eq entry_station
+        card.touch_in(first_station)
+        expect(journey.entry_station).to eq first_station
       end
 
     end
@@ -62,7 +62,7 @@ describe Oystercard do
     describe "#touch_out" do
 
       it "should test that minimum value is deducted from card at touch out" do
-        expect{ card.touch_out(exit_station) }.to change{ card.balance }.by(-described_class::MINIMUM_BALANCE)
+        expect{ card.touch_out(second_station) }.to change{ card.balance }.by(-described_class::MINIMUM_BALANCE)
       end
 
     end
