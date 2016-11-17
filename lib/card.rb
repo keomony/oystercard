@@ -19,15 +19,13 @@ class Oystercard
 
      def touch_in(station)
        raise "Cannot touch in: not enough funds" if balance < MINIMUM_BALANCE
-       @entry_station = station
-      #  @exit_station = nil
      end
 
-     def touch_out(station)
+     def touch_out(exit_station)
        @balance -= MINIMUM_BALANCE
-       exit_station = station
-       journey = store_journey(entry_station,exit_station)
-       @journeys << journey
+       #exit_station = station
+      #  journey = store_journey(entry_station,exit_station)
+       @journeys << store_journey(entry_station,exit_station)
        @entry_station = nil
      end
 
