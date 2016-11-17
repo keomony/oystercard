@@ -3,38 +3,32 @@ class Journey
 PENALTY_FARE = 6
 MINIMUM_FARE = 1
 
-  attr_reader :entry_station, :exit_station, :log, :fare
+  attr_reader :entry_station, :exit_station
 
   def initialize(station = nil)
-    @log = []
     @entry_station = station
-    @fare = PENALTY_FARE
+    @complete = false
   end
 
   def end(station)
     @exit_station = station
-    log << store_journey
+    @complete = true
+    self
   end
 
-  def store_journey
-    {entry_station => exit_station}
+  def fare
+    return PENALTY_FARE if penalty?
+    1
   end
 
-  def in_journey?
-    entry_station && !exit_station
-  end
-
-  def calculate_fare
-    @fare = MINIMUM_FARE if complete?
-    @fare
+  def complete?
+    @complete
   end
 
   private
 
-  def complete?
-    entry_station && exit_station
+  def penalty?
+    !entry_station || !exit_station
   end
-
-
 
 end

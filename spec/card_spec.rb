@@ -5,8 +5,8 @@ describe Oystercard do
   subject(:card) { described_class.new }
   let(:first_station) { double :station }
   let(:second_station) { double :station }
-  # let(:journey) { double :journey }
   let(:journey){ Journey.new(first_station) }
+
 
   describe "#initialization" do
 
@@ -62,13 +62,13 @@ describe Oystercard do
 
       it "should test that minimum value is deducted from card at touch out" do
         card.touch_in(first_station)
-        expect{ card.touch_out(second_station) }.to change{ card.balance }.by(-described_class::MINIMUM_BALANCE)
+        expect{ card.touch_out(second_station) }.to change{ card.balance }.by(-described_class::MINIMUM_CHARGE)
       end
 
       it "should get minimum fare when in complete journey" do
         card.touch_in(first_station)
         card.touch_out(second_station)
-        expect(card.balance).to eq(described_class::MAXIMUM_BALANCE - described_class::MINIMUM_BALANCE)
+        expect(card.balance).to eq(described_class::MAXIMUM_BALANCE - described_class::MINIMUM_CHARGE)
       end
 
       it "should get penalty fare when in incomplete journey" do

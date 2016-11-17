@@ -3,7 +3,7 @@ require 'station.rb'
 describe Station do
 
   describe "#initialization" do
-    subject(:station) { described_class.new("Old Street", 1) }
+    subject(:station) { described_class.new(name: "Old Street", zone: 1) }
 
     it 'has a name' do
       expect(subject.name).to eq "Old Street"
