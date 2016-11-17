@@ -13,8 +13,6 @@ class OysterCard
     self.balance += value
   end
 
-
-
   def touch_in(station)
     raise "Insufficient funds. You need to top up." if insufficient_funds?
     @entry_station = station

@@ -4,6 +4,9 @@ describe OysterCard do
   subject(:oystercard) {described_class.new}
   let(:station) {double :station}
 
+  it "should check that it has an empty list of journeys by default" do
+    expect(oystercard.journey_log).to be_empty
+  end
 
   context "balance" do
     it { is_expected.to respond_to(:balance) }
