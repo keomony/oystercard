@@ -1,3 +1,5 @@
+require_relative 'journey'
+
 class OysterCard
   MAXIMUM_LIMIT = 90
   MINIMUM_FARE = 1
@@ -9,22 +11,20 @@ class OysterCard
   end
 
   def top_up(value)
-    raise "Cannot top up: £#{MAXIMUM_LIMIT} limit would be exceeded" if balance + value > MAXIMUM_LIMIT
+    raise "Cannot top up: £#{MAXIMUM_LIMIT} limit would be exceeded" if max_exceeded?(value)
     self.balance += value
   end
 
   def touch_in(station)
     raise "Insufficient funds. You need to top up." if insufficient_funds?
     @entry_station = station
+    @journey = Journey.new(station)
   end
 
   def touch_out(station)
     deduct MINIMUM_FARE
     self.journey_log << {entry_station => station}
-  end
-
-  def in_journey?
-    !!entry_station
+    @journey.exit_at(station)
   end
 
   private
@@ -33,7 +33,11 @@ class OysterCard
   end
 
   def deduct(value)
-    self.balance -= value
+    self.balance -= @journey.calculate_fare
+  end
+
+  def max_exceeded?(value)
+    self.balance + value > MAXIMUM_LIMIT
   end
 
 end

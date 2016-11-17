@@ -32,7 +32,6 @@ describe OysterCard do
       end
       it { is_expected.to respond_to(:touch_in) }
       it { is_expected.to respond_to(:touch_out) }
-      it { is_expected.to respond_to(:in_journey?)}
       it 'deducts minimum fare when touched out' do
         station = "King's cross"
         oystercard.touch_in(station)
