@@ -27,15 +27,13 @@ describe OysterCard do
     context "sufficient funds" do
       before do
         oystercard.top_up(10)
-        entry_station = "King's cross"
-        oystercard.touch_in(entry_station)
-      end
-      it { is_expected.to respond_to(:touch_in) }
-      it { is_expected.to respond_to(:touch_out) }
-      it 'deducts minimum fare when touched out' do
-        station = "King's cross"
         oystercard.touch_in(station)
+      end
+      it "deducts minimum fare when touched ou" do
         expect{oystercard.touch_out(station)}.to change{oystercard.balance}.by(-1)
+      end
+      it "deducts penalty fare when touching in twice" do
+        expect{oystercard.touch_in(station)}.to change{oystercard.balance}.by(-6)
       end
     end
   end
