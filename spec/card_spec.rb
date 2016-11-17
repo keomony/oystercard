@@ -52,7 +52,7 @@ describe Oystercard do
 
     describe "#touch_in" do
 
-      it "should has entry_station" do
+      it "should create a new journey with entry_station" do
         card.touch_in(entry_station)
         expect(journey.entry_station).to eq entry_station
       end
