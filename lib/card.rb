@@ -1,15 +1,15 @@
 require_relative 'journey.rb'
+require_relative 'station.rb'
 
 class Oystercard
 
-  attr_reader :balance, :entry_station, :journeys
+  attr_reader :balance, :journey
 
     MAXIMUM_BALANCE = 90
     MINIMUM_BALANCE = 1
 
     def initialize
       @balance = 0
-      @journeys = []
     end
 
     def top_up(amount)
@@ -19,18 +19,11 @@ class Oystercard
 
      def touch_in(station)
        raise "Cannot touch in: not enough funds" if balance < MINIMUM_BALANCE
+       Journey.new(station)
      end
 
      def touch_out(exit_station)
        @balance -= MINIMUM_BALANCE
-       #exit_station = station
-      #  journey = store_journey(entry_station,exit_station)
-       @journeys << store_journey(entry_station,exit_station)
-       @entry_station = nil
-     end
-
-     def in_journey?
-       !!entry_station
      end
 
      private
@@ -39,7 +32,4 @@ class Oystercard
        @balance -= amount
      end
 
-     def store_journey(entry_station,exit_station)
-       {entry_station => exit_station}
-     end
   end

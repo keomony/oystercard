@@ -2,11 +2,8 @@ class Journey
 
   attr_reader :entry_station, :exit_station, :log
 
-  def initialize
+  def initialize(station = nil)
     @log = []
-  end
-
-  def start(station)
     @entry_station = station
   end
 

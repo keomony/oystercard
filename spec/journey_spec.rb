@@ -2,8 +2,7 @@ require 'journey.rb'
 
 describe Journey do
 
-  subject(:journey) {described_class.new}
-  let(:entry_station) { double :station }
+  subject(:journey1) { described_class.new(:station) }
   let(:exit_station) { double :station }
 
   # it { is_expected.to respond_to(:entry_station)}
@@ -13,11 +12,15 @@ describe Journey do
   #
   # it { is_expected.to respond_to(:end_journey).with(1).argument }
 
-  describe '#start_journey' do
+  describe '#initialize' do
 
-    it 'sets entry station' do
-      journey.start(entry_station)
-      expect(journey.entry_station).to eq entry_station
+    it 'has entry station' do
+      expect(journey1.entry_station).to eq :station
+    end
+
+    it "default's entry station to nil"  do
+      journey2 = Journey.new()
+      expect(journey2.entry_station).to eq nil
     end
 
   end
@@ -25,28 +28,25 @@ describe Journey do
   describe '#end_journey' do
 
     it 'sets exit station' do
-      journey.end(exit_station)
-      expect(journey.exit_station).to eq exit_station
+      journey1.end(exit_station)
+      expect(journey1.exit_station).to eq exit_station
     end
 
   end
 
   it 'should save a complete journey' do
-    journey.start(entry_station)
-    journey.end(exit_station)
-    store = {entry_station => exit_station}
-    expect(journey.log).to include store
+    journey1.end(exit_station)
+    store = {:station => exit_station}
+    expect(journey1.log).to include store
   end
 
   it 'knows when card is in a journey' do
-    journey.start(entry_station)
-    expect(journey).to be_in_journey
+    expect(journey1).to be_in_journey
   end
 
   it 'knows when a card is not in a journey' do
-    journey.start(entry_station)
-    journey.end(exit_station)
-    expect(journey).not_to be_in_journey
+    journey1.end(exit_station)
+    expect(journey1).not_to be_in_journey
   end
 
 end
