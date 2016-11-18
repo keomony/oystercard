@@ -19,8 +19,22 @@ class JourneyLog
     @journeys << @current_journey
   end
 
-  def current_journey(station)
-    @journey_klass.new(station) || @current_journey
+  def finish(station)
+      if @current_journey
+        @current_journey.end(station)
+      else
+        @current_journey = @journey_klass.new
+        @journeys << @current_journey
+        @current_journey.end(station)
+      end
+
+      @current_journey = nil
+  end
+
+  private
+
+  def current_journey
+    @current_journey || @journey_klass.new
   end
 
 end

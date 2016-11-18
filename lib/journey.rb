@@ -13,7 +13,7 @@ MINIMUM_FARE = 1
   def end(station)
     @exit_station = station
     @complete = true
-    self
+    # self
   end
 
   def fare

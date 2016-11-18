@@ -24,4 +24,20 @@ describe JourneyLog do
 
   end
 
+  describe '#finish' do
+    it {is_expected.to respond_to(:finish).with(1).argument}
+
+    it 'should add exit station to current journey' do
+      allow(journey_klass).to receive(:new).and_return journey
+      journey_log.start(station)
+      journey_log.finish(station)
+      expect(journey_log.current_journey.exit_station).to eq station
+
+    end
+
+
+  end
+
+
+
 end
