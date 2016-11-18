@@ -21,4 +21,8 @@ class JourneyLog
     @current_journey = nil
   end
 
+  # def current_journey
+  #   @current_journey || journey_klass.new
+  # end
+
 end

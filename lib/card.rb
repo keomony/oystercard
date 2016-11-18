@@ -26,7 +26,7 @@ class Oystercard
        @journey = Journey.new() if @journey.nil?
        @journey.end(exit_station)
        deduct(@journey.fare)
-       @journey = nil
+      #  @journey = nil
      end
 
      private
