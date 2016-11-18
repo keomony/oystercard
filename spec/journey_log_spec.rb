@@ -16,6 +16,12 @@ describe JourneyLog do
       journey_log.start(station)
     end
 
+    it "should record the journey" do
+      allow(journey_klass).to receive(:new).and_return journey
+      subject.start(station)
+      expect(subject.journeys).to include journey
+    end
+
   end
 
 end
