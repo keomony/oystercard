@@ -3,8 +3,6 @@ require_relative 'station.rb'
 
 class JourneyLog
 
-
-
   def initialize(journey_klass)
     @journey_klass = journey_klass
     @journeys = []
@@ -31,10 +29,15 @@ class JourneyLog
       @current_journey = nil
   end
 
-  private
-
-  def current_journey
-    @current_journey || @journey_klass.new
-  end
+  # def last_journey
+  #   @journeys.last
+  # end
+  #
+  # private
+  #
+  #
+  # # def current_journey
+  # #   @current_journey || @journey_klass.new
+  # # end
 
 end

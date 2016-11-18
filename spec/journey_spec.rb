@@ -20,10 +20,10 @@ describe Journey do
 
   context 'when given an entry station' do
 
-    subject(:journey) { described_class.new(:entry_station) }
+    subject(:journey) { described_class.new(entry_station) }
 
     it 'has an entry station' do
-      expect(subject.entry_station).to eq :entry_station
+      expect(subject.entry_station).to eq entry_station
     end
 
     it 'returns a penalty fare if no exit station given' do

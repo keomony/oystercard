@@ -4,6 +4,7 @@ PENALTY_FARE = 6
 MINIMUM_FARE = 1
 
   attr_reader :entry_station, :exit_station
+  attr_accessor :complete
 
   def initialize(station = nil)
     @entry_station = station
@@ -12,8 +13,8 @@ MINIMUM_FARE = 1
 
   def end(station)
     @exit_station = station
-    @complete = true
-    # self
+    self.complete = true
+    self
   end
 
   def fare
@@ -22,7 +23,7 @@ MINIMUM_FARE = 1
   end
 
   def complete?
-    @complete
+    complete
   end
 
   private
